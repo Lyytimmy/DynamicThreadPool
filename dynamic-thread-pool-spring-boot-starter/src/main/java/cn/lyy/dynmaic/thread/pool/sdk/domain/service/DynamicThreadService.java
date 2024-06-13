@@ -14,7 +14,7 @@ public interface DynamicThreadService {
     List<ThreadPoolConfigEntity> queryThreadPoolList();
 
     /**
-     * 根据名字查线程池信息
+     * 根据名字查线程池参数
      */
     ThreadPoolConfigEntity queryThreadPoolConfigByName(String threadPoolName);
 
