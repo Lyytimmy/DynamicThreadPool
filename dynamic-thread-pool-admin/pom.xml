@@ -9,7 +9,8 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>dynamic-thread-pool-test</artifactId>
+    <artifactId>dynamic-thread-pool-admin</artifactId>
+
     <packaging>jar</packaging>
 
     <dependencies>
@@ -47,17 +48,15 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
-
-        <!-- 线程组件 -->
         <dependency>
-            <groupId>cn.lyy</groupId>
-            <artifactId>dynamic-thread-pool-spring-boot-starter</artifactId>
-            <version>1.0</version>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.26.0</version>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>dynamic-thread-pool-test</finalName>
+        <finalName>dynamic-thread-pool-admin-app</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -93,11 +92,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.lyy.Application</mainClass>
+                    <mainClass>cn.lyy.dynamic.thread.pool.Application</mainClass>
                     <layout>JAR</layout>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
