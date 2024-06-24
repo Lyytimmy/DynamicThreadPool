@@ -14,7 +14,7 @@ import java.util.List;
  * 线程池数据上报任务
  */
 public class ThreadPoolDataReportJob {
-    private Logger logger = LoggerFactory.getLogger(ThreadPoolDataReportJob.class);
+    private final Logger logger = LoggerFactory.getLogger(ThreadPoolDataReportJob.class);
 
     // 通过服务拿数据
     private final DynamicThreadServiceImpl dynamicThreadService;
