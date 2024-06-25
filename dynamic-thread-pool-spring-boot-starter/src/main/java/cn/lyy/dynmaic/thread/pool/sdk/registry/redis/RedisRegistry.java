@@ -25,9 +25,21 @@ public class RedisRegistry implements IRegistry {
     @Override
     public void reportThreadPool(List<ThreadPoolConfigEntity> threadPoolConfigEntities) {
         RList<ThreadPoolConfigEntity> list = redissonClient.getList(RegistryEnumVO.THREAD_POOL_CONFIG_LIST_KEY.getKey());
-        // todo 如何不重复添加
-        list.addAll(threadPoolConfigEntities);
-
+        // 遍历redis中的线程池配置，如果应用名称和线程池名称一样，则更新，否则添加
+        for (ThreadPoolConfigEntity threadPoolConfigEntity : threadPoolConfigEntities) {
+            String threadPoolName = threadPoolConfigEntity.getThreadPoolName();
+            String appName = threadPoolConfigEntity.getAppName();
+            for (ThreadPoolConfigEntity entity : list) {
+                if (entity.getAppName().equals(appName) && entity.getThreadPoolName().equals(threadPoolName)) {
+                    entity.setActiveCount(threadPoolConfigEntity.getActiveCount());
+                    entity.setPoolSize(threadPoolConfigEntity.getPoolSize());
+                    entity.setQueueSize(threadPoolConfigEntity.getQueueSize());
+                    entity.setRemainingCapacity(threadPoolConfigEntity.getRemainingCapacity());
+                    return;
+                }
+            }
+            list.add(threadPoolConfigEntity);
+        }
     }
 
     @Override
